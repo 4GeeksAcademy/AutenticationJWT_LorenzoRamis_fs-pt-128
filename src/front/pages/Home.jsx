@@ -33,20 +33,21 @@ export const Home = () => {
 	}, [])
 
 	return (
-		<div className="text-center mt-5">
-			<h1 className="display-4">Hello Rigo!!</h1>
-			<p className="lead">
-				<img src={rigoImageUrl} className="img-fluid rounded-circle mb-3" alt="Rigo Baby" />
-			</p>
-			<div className="alert alert-info">
-				{store.message ? (
-					<span>{store.message}</span>
-				) : (
-					<span className="text-danger">
-						Loading message from the backend (make sure your python 🐍 backend is running)...
-					</span>
-				)}
+		<>
+			<div className="container">
+				<h1 className="text-center">HOME</h1>
+				<form>
+					<div className="mb-3">
+						<label for="exampleInputEmail1" className="form-label">Email address</label>
+						<input type="email" className="form-control" placeholder="Email" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+					</div>
+					<div className="mb-3">
+						<label for="exampleInputPassword1" className="form-label" >Password</label>
+						<input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+					</div>
+					<button type="submit" className="btn btn-primary w-100">Submit</button>
+				</form>
 			</div>
-		</div>
+		</>
 	);
 }; 
