@@ -1,11 +1,36 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { login } from "../services/backendServices.js";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
+	const navigate = useNavigate()
+	const [user, setUser] = useState({
+		email: '',
+		password: ''
+	})
 
+	const handleChange = (e) => {
+		setUser({
+			...user,
+			[e.target.name] : e.target.value
+		})
+	}
+
+	const handleSumit =(e) =>{
+		e.preventDefault()
+		if(!user.email||!user.password){
+			alert('All fields are requerid')
+			return
+		}
+		login(user, navigate)
+	}
+
+	console.log(user);
+	
 	const loadMessage = async () => {
 		try {
 			const backendUrl = import.meta.env.VITE_BACKEND_URL
@@ -36,14 +61,29 @@ export const Home = () => {
 		<>
 			<div className="container">
 				<h1 className="text-center">HOME</h1>
-				<form>
+				<form onSubmit={handleSumit}>
 					<div className="mb-3">
-						<label for="exampleInputEmail1" className="form-label">Email address</label>
-						<input type="email" className="form-control" placeholder="Email" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+						<label htmlFor="email" className="form-label">Email address</label>
+						<input 
+						type="email" 
+						className="form-control" 
+						id='email'
+						placeholder="Email" 
+						name="email" 
+						aria-describedby="email"
+						value={user.email}
+						onChange={handleChange} />
 					</div>
 					<div className="mb-3">
-						<label for="exampleInputPassword1" className="form-label" >Password</label>
-						<input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+						<label htmlFor="password" className="form-label" >Password</label>
+						<input 
+						type="password" 
+						className="form-control" 
+						id="password" 
+						name="password" 
+						placeholder="Password" 
+						value={user.password}
+						onChange={handleChange}/>
 					</div>
 					<button type="submit" className="btn btn-primary w-100">Submit</button>
 				</form>

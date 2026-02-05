@@ -1,10 +1,29 @@
-export const UserView = () =>{
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 
-    return(
+export const UserView = () => {
+
+    const navigate = useNavigate()
+    const {id} = useParams()
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            navigate('/')
+        } else {
+            setLoading(false)
+        }
+    }, [])
+    return (
         <>
-        <div className="text-center">
-           <h1>Vista Usuario</h1> 
-        </div>
+            {loading ? (<div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>) : (
+
+                <div className="text-center">
+                    <h1>Hola</h1>
+                </div>
+            )}
         </>
     )
 }

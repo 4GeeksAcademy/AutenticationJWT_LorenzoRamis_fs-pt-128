@@ -30,12 +30,12 @@ def register():
     password = data.get('password')
     
     if not email or not password :
-        return jsonify({'Error': 'Email and password requerid'}), 400
+        return jsonify({'error': 'Email and password requerid'}), 400
     
     existe_user = db.session.execute(select(User).where(User.email==email)).scalar_one_or_none()
 
     if existe_user:
-        return jsonify({'Error': 'User whit this email is already exist'}), 400
+        return jsonify({'error': 'User whit this email is already exist'}), 400
     new_user = User(email=email)
     new_user.set_password(password)
     db.session.add(new_user)
@@ -50,17 +50,20 @@ def login():
     password = data.get('password')
     
     if not email or not password :
-        return jsonify({'Error': 'Email and password requerid'}), 400
+        return jsonify({'error': 'Email and password requerid'}), 400
     
     user = db.session.execute(select(User).where(User.email==email)).scalar_one_or_none()
 
     if user is None:
-        return jsonify({'Error': 'Inavalid email or password'}), 400
+        return jsonify({'error': 'Inavalid email or password'}), 400
     
     if user.check_password(password):
         access_token = create_access_token(identity=str(user.id))
-        return jsonify({'msg': 'Login succesfully', 'token': access_token}), 200
-    return jsonify({'Error': 'Email and password requerid'}), 400
+        return jsonify({
+            'msg': 'Login succesfully', 
+            'token': access_token,
+            'user': user.serialize()}), 200
+    return jsonify({'error': 'Email and password requerid'}), 400
 
 @api.route('/profile', methods=['GET'])
 @jwt_required()
@@ -69,5 +72,5 @@ def get_profile():
     user=db.session.get(User, int(user_id))
 
     if not user:
-        return jsonify({'Error': 'User not found'}), 400
+        return jsonify({'error': 'User not found'}), 400
     return jsonify(user.serialize())
