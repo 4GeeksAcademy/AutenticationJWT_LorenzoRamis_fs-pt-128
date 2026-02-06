@@ -1,5 +1,5 @@
 export const login = async (user, navigate) => {
-  const responde = await fetch(
+  const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}/api/login`,
     {
       method: "POST",
@@ -10,16 +10,17 @@ export const login = async (user, navigate) => {
     }
   )
 
-  const data = await responde.json()
-  if(!responde.ok){
+  const data = await response.json()
+  if(!response.ok){
     alert(data.error)
+    return
   }
   localStorage.setItem('token', data.token)
-  navigate('/users/')
+  navigate(`/users/${data.user.id}`)
 };
 
 export const register = async (user, navigate) => {
-  const responde = await fetch(
+  const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}/api/register`,
     {
       method: "POST",
@@ -30,9 +31,24 @@ export const register = async (user, navigate) => {
     }
   )
   
-  const data = await responde.json()
-  if(!responde.ok){
+  const data = await response.json()
+  if(!response.ok){
     alert(data.error)
   }
   navigate('/')
+}
+
+export const userCheck = async () => {
+  const response = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/api/profile`, {
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
+  )
+  const data = await response.json()
+  if (!response.ok){
+    return false
+  }
+  return data
 }
