@@ -1,8 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"
 
 export const Navbar = () => {
 
-	const location = useLocation();
+	const location = useLocation()
+
+	const UrlUsers = location.pathname.includes('/users/') ||location.pathname.includes('/register') ||location.pathname.includes('/movie/')
 	return (
 		<nav className="navbar navbar-light bg-dark">
 			<div className="container">
@@ -12,7 +14,7 @@ export const Navbar = () => {
 				</Link>
 				)}
 				<div className="ms-auto">
-				{location.pathname !=='/register' && (
+				{!UrlUsers && (
 					<Link to="/register">
 						<button className="btn btn-primary text-end ">Sing Up</button>
 					</Link>
@@ -20,5 +22,5 @@ export const Navbar = () => {
 				</div>
 			</div>
 		</nav>
-	);
-};
+	)
+}
