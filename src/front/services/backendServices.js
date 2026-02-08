@@ -1,4 +1,3 @@
-const KEY_TMDB = "264e94206a227144b384499691e51dcd"
 const URL_BASE_TMDB = "https://api.themoviedb.org/3"
 
 export const login = async (user, navigate) => {
@@ -22,7 +21,7 @@ export const login = async (user, navigate) => {
     return
   }
   localStorage.setItem("token", data.token)
-  navigate(`/users/${data.user.id}`)
+  navigate('/users/')
 }
 
 export const register = async (user, navigate) => {
@@ -105,7 +104,23 @@ export const getRantedTv = async (id) => {
 }
 
 export const getMovies = async (id) => {
-  const resp = await fetch(`${URL_BASE_TMDB}/movie/${id}`, {
+  const resp = await fetch(`${URL_BASE_TMDB}/movie/${id}?language=es-ES`, {
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_TOKEN_TMDB}`,
+    },
+  })
+
+  if (resp.ok) {
+    const data = await resp.json()
+
+    return data
+  } else {
+    alert(data.error)
+  }
+}
+
+export const getSeries = async (id) => {
+  const resp = await fetch(`${URL_BASE_TMDB}/tv/${id}?language=es-ES`, {
     headers: {
       Authorization: `Bearer ${import.meta.env.VITE_TOKEN_TMDB}`,
     },

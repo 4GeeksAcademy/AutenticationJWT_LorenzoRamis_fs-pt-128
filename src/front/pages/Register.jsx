@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { register } from "../services/backendServices.js";
+import logoFlixy from "../assets/img/LogoFlixy.png";
+
 
 export const Register = () => {
 
@@ -33,46 +35,51 @@ export const Register = () => {
 
     return (
         <>
-            <div className="container mt-5">
+            <div className="container mt-2">
+                <Link to={'/'} className="btn text-white">
+                    Back
+                </Link>
                 <div className="row justify-conten-center">
-                    <h1 className="text-center">REGISTER</h1>
-                    <div className="col-12 col-md-6 rounded bg-white p-4 shadow mx-auto">
+                    <div className="col-12 col-md-6 rounded bg-transparent p-4 mx-auto">
+                        <div className="container">
+                            <img className="img-fluid" src={logoFlixy} alt="" />
+                        </div>
                         <form onSubmit={handleSumit}>
                             <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email address</label>
+                                <label htmlFor="email" className="form-label text-white">Correo</label>
                                 <input
                                     type="email"
                                     className="form-control"
                                     id='email'
-                                    placeholder="Email"
+                                    placeholder="Correo"
                                     name="email"
                                     aria-describedby="email"
                                     value={user.email}
                                     onChange={handleChange} />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="password" className="form-label" >Password</label>
+                                <label htmlFor="password" className="form-label text-white" >Contraseña</label>
                                 <input
                                     type="password"
                                     className="form-control"
                                     id="password"
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder="Contraseña"
                                     value={user.password}
                                     onChange={handleChange} />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="name" className="form-label" >First name</label>
+                                <label htmlFor="name" className="form-label text-white" >Nombre de usuario</label>
                                 <input
                                     type="name"
                                     className="form-control"
                                     id="name"
                                     name="name"
-                                    placeholder="Enter your Name"
+                                    placeholder="Nombre de usuario"
                                     value={user.name}
                                     onChange={handleChange} />
                             </div>
-                            <button type="submit" className="btn btn-primary w-100">Submit</button>
+                            <button type="submit" className="btn btn-primary w-100">Registrarse</button>
                         </form>
                     </div>
                 </div>

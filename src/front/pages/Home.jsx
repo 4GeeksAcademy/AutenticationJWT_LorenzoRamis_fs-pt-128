@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx"
 import { login } from "../services/backendServices.js"
 import { useNavigate } from "react-router-dom"
+import logoFlixy from "../assets/img/LogoFlixy.png"
 
 export const Home = () => {
 
@@ -34,36 +35,37 @@ export const Home = () => {
 
 	return (
 		<>
-			<div className="container mt-5">
+			<div className="container mt-2">
 				<div className="row justify-conten-center bg-transparent text-white">
-					<div className="col-12 col-md-6 p-4 mx-auto">
-						<form onSubmit={handleSumit}>
+					<div className="col-12 col-md-6 p-4 mx-auto align-content-center">
+						<img className="img-fluid" src={logoFlixy} alt="" />
+						<form onSubmit={handleSumit} >
 							<div className="mb-3">
-								<label htmlFor="email" className="form-label">Email address</label>
+								<label htmlFor="email" className="form-label">Correo</label>
 								<input
 									type="email"
 									className="form-control"
 									id='email'
-									placeholder="Email"
+									placeholder="Correo"
 									name="email"
 									aria-describedby="email"
 									value={user.email}
 									onChange={handleChange} />
 							</div>
 							<div className="mb-3">
-								<label htmlFor="password" className="form-label" >Password</label>
+								<label htmlFor="password" className="form-label" >Contraseña</label>
 								<input
 									type="password"
 									className="form-control"
 									id="password"
 									name="password"
-									placeholder="Password"
+									placeholder="Contraseña"
 									value={user.password}
 									onChange={handleChange} />
 							</div>
-							<button type="submit" className="btn btn-primary w-100">Submit</button>
+							<button type="submit" className="btn btn-primary w-100">Ingresar</button>
 						</form>
-						<h1 className="mt-5 text-center">Live the movies</h1>
+						<h1 className="mt-5 text-center"></h1>
 					</div>
 					<div className="col-12 col-md-6">
 						<div className="container text-center">

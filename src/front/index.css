@@ -1,3 +1,17 @@
 body{
     background-color: #212529;
+    font-family: Montserrat;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+    height: 6px; 
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background-color: var(--bs-gray-700); 
+    border-radius: 20px; 
 }

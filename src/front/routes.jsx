@@ -12,6 +12,7 @@ import { Demo } from "./pages/Demo";
 import { Register } from "./pages/Register";
 import { UserView } from "./pages/UserView";
 import { MoviesDetails } from "./pages/MoviesDetails";
+import { SeriesDetails } from "./pages/SeriesDetails";
 
 
 export const router = createBrowserRouter(
@@ -30,8 +31,9 @@ export const router = createBrowserRouter(
         <Route path="/single/:theId" element={ <Single />} />  
         <Route path="/demo" element={<Demo />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/users/:id" element={<UserView />} />
+        <Route path="/users/" element={<UserView />} />
         <Route path="/movie/:id" element={<MoviesDetails/>} />
+        <Route path="/serie/:id" element={<SeriesDetails/>} />
       </Route>
     )
 );
